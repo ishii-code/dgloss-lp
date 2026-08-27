@@ -339,7 +339,138 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
   *{animation:none!important;transition:none!important}
   html{scroll-behavior:auto}
 }
+
+/* ===== デモ通話 追加分（2026-08-17 要件定義 §13-6） ===== */
+.opt{font-size:9.5px;letter-spacing:.1em;background:transparent;border:1px solid rgba(255,255,255,.22);color:#8A91AC;padding:2px 5px;border-radius:2px;font-weight:700}
+.auto{font-size:9.5px;letter-spacing:.06em;border:1px solid rgba(214,251,0,.5);color:#D6FB00;padding:2px 5px;border-radius:2px;font-weight:700}
+/* 任意欄は枠で囲まない。ラベルの「任意」バッジだけで区別する */
+.field.optional .lb{color:#B7BEDA}
+.cnt{font-family:var(--mono,ui-monospace);font-size:10.5px;color:var(--muted);margin-top:6px;text-align:right;letter-spacing:.04em}
+.cnt.warn{color:var(--flare)}
+.pills{display:flex;gap:10px;flex-wrap:wrap}
+.pill{flex:1 1 210px;display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:rgba(0,0,0,.3);border-radius:2px;padding:12px 14px;font-size:12.5px;color:#E7EAF6;cursor:pointer;text-align:left}
+.pill:hover{border-color:rgba(242,102,17,.6)}
+.pill i{flex:none;width:12px;height:12px;border-radius:50%;border:1px solid var(--muted);display:block}
+.pill.on{border-color:var(--flare);background:rgba(242,102,17,.16)}
+.pill.on i{border-color:var(--flare);background:var(--flare);box-shadow:inset 0 0 0 2px rgba(9,12,32,.9)}
+.divider{display:flex;align-items:center;gap:12px;margin:30px 0 20px;font-family:var(--en);font-size:10.5px;letter-spacing:.16em;color:var(--flare);font-weight:800}
+.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+.divider.q{color:#C3CCFF}
+.ro{background:rgba(43,47,184,.16)!important;border:1px dashed rgba(120,140,255,.5)!important;color:#E7EAF6!important;padding:12px 14px;font-size:12.8px;line-height:1.8;border-radius:2px}
+.ro b{color:#FFCFAE}
+
+
+
+.firstline{margin-top:14px;border:1px solid var(--line);border-left:3px solid var(--flare);background:rgba(255,255,255,.05);border-radius:2px 10px 10px 10px;padding:12px 15px;font-size:12.6px;line-height:1.9}
+.firstline b{color:#FFCFAE;font-weight:500}
+.reqleft{margin-top:14px;font-size:11.5px;color:var(--muted);text-align:center}
+.reqleft.on{color:#FF8A8A}
+@media (max-width:700px){.pill{flex:1 1 100%}}
+/* ===== 受付番号の画面（決定52・インバウンド） ===== */
+.callbox{border:1px solid rgba(214,251,0,.4);background:rgba(214,251,0,.07);border-radius:3px;padding:26px 22px;text-align:center;margin:20px 0}
+.cb-lab{font-size:11.5px;letter-spacing:.14em;color:var(--muted);margin:0 0 10px}
+.cb-no{display:inline-block;font-family:var(--en);font-size:40px;font-weight:900;color:#fff;text-decoration:none;letter-spacing:.01em;line-height:1.15}
+.cb-tap{font-size:11.5px;color:#D6FB00;margin:8px 0 0}
+.cb-from{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:#CBD1E6;line-height:1.9}
+.cb-from b{display:block;font-family:var(--en);font-size:20px;font-weight:800;color:#fff;margin:4px 0}
+.limitbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;border:1px solid var(--line);border-radius:3px;padding:11px 15px;font-size:12px}
+.lb-lab{color:var(--muted);letter-spacing:.08em}
+.lb-val{font-family:var(--en);font-size:16px;font-weight:800;color:#fff}
+.lb-note{color:var(--muted);font-size:11.5px}
+.callnote{border:1px solid var(--line);border-left:3px solid var(--flare);background:rgba(242,102,17,.07);border-radius:0 6px 6px 0;padding:13px 16px;margin:18px 0;font-size:12.5px;line-height:1.9;color:#CBD1E6}
+.callnote p{margin:0 0 8px}
+.callnote p:last-child{margin:0}
+.callnote b{color:#fff}
+@media (max-width:520px){.cb-no{font-size:30px}}
+
+
+
+
+
+
+
+
+@keyframes spin{to{transform:rotate(360deg)}}
+.btn:disabled{opacity:.4;cursor:not-allowed;filter:grayscale(.4)}
+
+
+
+@media (prefers-reduced-motion:reduce){}
+/* ===== 認証後：着信をお待ちください ===== */
+
+
+
+
+@keyframes pulse{70%{box-shadow:0 0 0 12px rgba(214,251,0,0)}100%{box-shadow:0 0 0 0 rgba(214,251,0,0)}}
+
+.wait-eta b{color:#fff}
+.guide{margin:22px 0 0;padding:0;list-style:none;display:grid;gap:12px}
+.guide li{display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;font-size:12.8px;line-height:1.85;color:#CBD1E6}
+.guide .g-n{font-family:var(--en);font-size:11px;font-weight:800;color:var(--flare);padding-top:4px}
+.guide b{color:#fff}
+.after{margin-top:22px;border-top:1px solid var(--line);padding-top:16px;font-size:12px;color:var(--muted);line-height:1.85}
+.after b{color:#CBD1E6}
+@media (prefers-reduced-motion:reduce){}
+/* ===== 決定47: アップデート中の表示 ===== */
+#maint{display:none}
+#maint.on{display:block}
+.maint-box{border:1px solid rgba(43,47,184,.5);background:rgba(43,47,184,.12);border-radius:3px;padding:30px 28px;text-align:center}
+.maint-box .ttl{font-size:19px;font-weight:800;margin:0 0 12px;color:#fff}
+.maint-box p{font-size:13.5px;color:#CBD1E6;line-height:1.9;margin:0 auto;max-width:46ch}
+.maint-box .spin{width:26px;height:26px;border:3px solid rgba(255,255,255,.2);border-top-color:#D6FB00;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 16px}
+
+/* ===== 決定50: 通話開始時のステータスを目立たせる ===== */
+
+
+
+
+
+
+@media (max-width:520px){}
+/* ===== 決定51: ガードレールの注意書き ===== */
+/* ===== 決定46改: 発信「前」に読ませる案内 ===== */
+
+
+
+
+/* iPhone向けの注意（独立したブロックとして見せる） */
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width:520px){}
+.guard{border:1px solid var(--line);border-left:3px solid #2B2FB8;background:rgba(43,47,184,.09);border-radius:0 6px 6px 0;padding:12px 15px;font-size:12.5px;line-height:1.85;color:#CBD1E6;margin:16px 0}
+.guard b{color:#fff}
 </style>
+
+<!-- ============================================================
+     デモ通話API の接続先（★環境の切り替えはこの1箇所だけ）
+       本番    : https://xrjbqfvtm2.ap-northeast-1.awsapprunner.com
+       検証環境: https://t6zasvru9u.ap-northeast-1.awsapprunner.com
+     切り替え方: 下の2行のコメントを入れ替える（いまは本番）。
+
+     ★テスト段階から本番APIを使う（2026-08-26 オーナー決定・決定68）。
+       申込・台本・通話が**本番のデータ**として作られる（デモ専用テナント v8569 の中だけ）。
+       - 営業のグループ（pd@dgloss.co.jp）にリード通知が飛ぶ。
+         テストのときは会社名に【テスト】を入れて見分けが付くようにすること。
+       - 1日100件の受付上限を消費する。
+
+     ★CORSの許可が要る（無いとブラウザが通信自体を止める。サーバのログにも残らない）。
+       本番が許可しているのは https://dgloss.co.jp のみ。
+       → **Vercel で試す間は、本番に APP_LP_URL=https://dgloss-lp.vercel.app が必要**。
+       → 最終的に dgloss.co.jp/ai-solution/demo へ同居させたら APP_LP_URL は消す（決定65）。
+     ============================================================ -->
+<script>
+  var API_BASE = 'https://xrjbqfvtm2.ap-northeast-1.awsapprunner.com';   // 本番（既定）
+  // var API_BASE = 'https://t6zasvru9u.ap-northeast-1.awsapprunner.com'; // 検証環境
+</script>
 </head>
 <body>
 
@@ -368,15 +499,22 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
         </div>
 
         <h1 class="h1">その営業電話、<br><mark>人ではありません</mark>。<br>2分で、聞き分けてください。</h1>
-        <p class="hero-lead">話し出しの間合いも、断られたあとの切り返しも、聞けば一度で判断できます。フォームを送信すると、稼働中のAIがそのままお客様の番号へ発信します。貴社の見込み顧客が受け取るのと同じ通話です。</p>
+        <p class="hero-lead">話し出しの間合いも、断られたあとの切り返しも、聞けば一度で判断できます。フォームを送信すると<b>受付番号</b>が表示されます。その番号におかけいただくと、稼働中のAIがご入力の内容のまま応対します。貴社の見込み顧客が受け取るのと同じ通話です。</p>
 
         <div class="chips">
           <span class="chip"><b>2分</b>最大通話時間</span>
           <span class="chip"><b>0円</b>体験費用</span>
-          <span class="chip"><b>5項目</b>入力内容</span>
+          <span class="chip"><b>7項目</b>必須入力</span>
         </div>
 
         <div class="form-card" id="entry">
+          <div id="maint">
+            <div class="maint-box">
+              <div class="spin"></div>
+              <p class="ttl">ただいまサービスをアップデートしています</p>
+              <p>新しい機能をお届けするための作業中です。<br>まもなく再開しますので、少しあとにお試しください。</p>
+            </div>
+          </div>
           <form id="demoForm" novalidate>
             <div class="form-head">
               <h2>デモ着信の申し込み</h2>
@@ -389,9 +527,10 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
                 <input type="text" id="company" placeholder="株式会社サンプル商事" autocomplete="organization">
                 <p class="msg" role="alert" aria-live="polite" data-for="company"></p>
               </div>
-              <div class="field">
-                <label class="lb" for="dept">部署 <span class="req">必須</span></label>
-                <input type="text" id="dept" placeholder="営業推進部" autocomplete="organization-title">
+              <div class="field optional">
+                <label class="lb" for="dept">部署・役職 <span class="opt">任意</span></label>
+                <input type="text" id="dept" placeholder="営業推進部 部長" autocomplete="organization-title">
+                <p class="hint">ご記入いただくと、後日のご案内に役立ちます。AIの発話には使いません。</p>
                 <p class="msg" role="alert" aria-live="polite" data-for="dept"></p>
               </div>
               <div class="field">
@@ -400,53 +539,136 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
                 <p class="msg" role="alert" aria-live="polite" data-for="name"></p>
               </div>
               <div class="field">
-                <label class="lb" for="tel">電話番号 <span class="req">必須</span></label>
+                <label class="lb" for="tel">携帯番号 <span class="req">必須</span></label>
                 <input type="tel" id="tel" placeholder="09012345678" autocomplete="tel" inputmode="tel">
-                <p class="hint">AIが発信する番号です。携帯・固定のどちらでも受け付けます。</p>
+                <p class="hint"><b>この番号からおかけいただきます。</b>お客様の番号と照合するため、携帯電話番号（070／080／090）のみ受け付けます。</p>
                 <p class="msg" role="alert" aria-live="polite" data-for="tel"></p>
               </div>
               <div class="field full">
                 <label class="lb" for="email">メールアドレス <span class="req">必須</span></label>
                 <input type="email" id="email" placeholder="taro.yamada@example.co.jp" autocomplete="email">
-                <p class="hint">通話後に、文字起こしと分析レポートをお送りします。</p>
+                <p class="hint">通話後に、通話の録音をお送りします。</p>
                 <p class="msg" role="alert" aria-live="polite" data-for="email"></p>
+              </div>
+
+            </div>
+
+            <div class="divider">AIが話す内容</div>
+
+            <div class="field">
+              <label class="lb">AIはこう名乗ります</label>
+              <div class="ro"><b id="sayCompany">〇〇</b>の<b>おおたに</b>と申します（男性の声・変更できません）</div>
+            </div>
+
+            <div class="grid2" style="margin-top:20px">
+              <div class="field">
+                <label class="lb" for="callee">呼び出したい相手 <span class="req">必須</span></label>
+                <input type="text" id="callee" placeholder="営業ご担当者様" maxlength="30" autocomplete="off">
+                <p class="cnt" data-cnt="callee">0 / 30字</p>
+                <p class="msg" role="alert" aria-live="polite" data-for="callee"></p>
+              </div>
+              <div class="field">
+                <label class="lb" for="svc">サービス名 <span class="req">必須</span></label>
+                <input type="text" id="svc" placeholder="AI営業支援サービス" maxlength="50" autocomplete="off">
+                <p class="cnt" data-cnt="svc">0 / 50字</p>
+                <p class="msg" role="alert" aria-live="polite" data-for="svc"></p>
+              </div>
+              <div class="field full">
+                <label class="lb" for="purpose">用件（ひとことで） <span class="req">必須</span></label>
+                <input type="text" id="purpose" placeholder="営業の架電業務を自動化するご提案で" maxlength="40" autocomplete="off">
+                <p class="cnt" data-cnt="purpose">0 / 40字</p>
+                <p class="hint">電話で読み上げる一言です。長いと要点がぼやけます。</p>
+                <p class="msg" role="alert" aria-live="polite" data-for="purpose"></p>
               </div>
             </div>
 
             <div class="notice">
-              <b>この着信は、体験用のデモ通話です。</b>実際の営業電話ではありません。<b>通話時間は最大2分以内で、</b>2分が経過するとデモ通話は自動的に切断されます。途中で切断された場合も、そこまでの通話ログをメールでお送りします。
+              <b>この着信は、体験用のデモ通話です。</b>実際の営業電話ではありません。<b>入力内容はAIがそのまま読み上げます。</b><br>
+              <b>AIが行うのは受付突破までです。</b>ご担当者につないでいただけた段階で、AIが「担当に変わります」とご案内して終話します（デモではオペレーターには繋がりません）。<br>
+              <b>通話時間は最大2分以内で、</b>2分が経過するとデモ通話は自動的に切断されます。途中で切断された場合も、そこまでの録音をメールでお送りします。<br>
+              <b>混み合っているときは、最大30秒ほどお待ちいただくことがあります。</b><br>
+              <b>通話料はお客様のご負担です</b>（携帯から03へ・2分で概ね80〜120円）。<br>
+              <b>AIは、ご入力いただいた営業トークの範囲でお応えします。</b>それ以外の話題にはお答えできないよう設定されています。
             </div>
 
             <label class="agree">
               <input type="checkbox" id="agree">
-              <span><a href="#">個人情報の取り扱い</a>に同意します。デモ通話は品質向上のため録音されます。</span>
+              <span><a href="#">個人情報の取り扱い</a>に同意します。デモ通話は品質向上のため録音され、入力内容はAIがそのまま読み上げます。</span>
             </label>
             <p class="msg" role="alert" aria-live="polite" data-for="agree"></p>
 
             <div class="cta-block">
               <div class="cta-top">
                 <span class="free">無料</span>
-                <span class="cta-cap">入力5項目／送信後、最短1分でAIが発信します</span>
+                <span class="cta-cap">必須7項目／送信すると受付番号が表示されます</span>
               </div>
-              <button class="btn btn-lg btn-primary btn-block" type="submit"><b>今すぐAI通話を体験する</b><i>→</i></button>
-              <p class="submit-note">デモ通話は最大2分以内／営業担当からの折り返しは発生しません</p>
+              <p class="reqleft" id="reqLeft">未入力の必須項目：7件</p>
+              <button class="btn btn-lg btn-primary btn-block" type="submit" id="submitBtn"><b>受付番号を表示する</b><i>→</i></button>
+              <p class="submit-note">デモ通話は最大2分以内／受付突破までをAIが行います<br>受付：平日 8:00〜21:00／<b>通話料はお客様のご負担となります</b></p>
             </div>
+            <p class="hint" style="text-align:center;margin-top:14px">ご不明な点は <a href="tel:0368698063" style="color:var(--flare);border-bottom:1px solid rgba(242,102,17,.5)">03-6869-8063</a>（平日 10:00〜19:00・土日祝を除く）までお問い合わせください。</p>
             <p class="form-err" id="formErr" role="alert" aria-live="assertive">入力内容をご確認ください。</p>
           </form>
 
           <div class="sent" id="sent">
             <p class="ok">RECEIVED ─ 受け付けました</p>
-            <h2>まもなく <span id="sentTel">―</span> へ<br>AIが発信します。</h2>
-            <p>着信までおよそ1分です。呼び出し音が鳴ったら、いつも通りお出ください。このデモ通話は最大2分以内で、2分が経過すると自動的に切断されます。終了後、文字起こしと分析レポートをメールでお送りします。</p>
-            <div class="recap">
-              <div><dt>会社名</dt><dd id="rCompany">―</dd></div>
-              <div><dt>部署</dt><dd id="rDept">―</dd></div>
-              <div><dt>氏名</dt><dd id="rName">―</dd></div>
-              <div><dt>電話番号</dt><dd id="rTel">―</dd></div>
-              <div><dt>メール</dt><dd id="rEmail">―</dd></div>
+            <h2>この番号に<br>おかけください。</h2>
+
+            <div class="callbox">
+              <p class="cb-lab">デモ通話 受付番号</p>
+              <a class="cb-no" id="dialNo" href="tel:03XXXXXXXX">03-XXXX-XXXX</a>
+              <p class="cb-tap">タップで発信できます</p>
+              <div class="cb-from">
+                <span>お申し込みいただいた</span>
+                <b id="fromTel">―</b>
+                <span>からおかけください</span>
+              </div>
             </div>
+
+            <div class="limitbar">
+              <span class="lb-lab">有効期限</span>
+              <span class="lb-val" id="expiry">残り 30:00</span>
+              <span class="lb-note">過ぎた場合は、もう一度お申し込みください</span>
+            </div>
+
+            <p class="hint" style="margin-top:18px">おつなぎすると、AIはこの第一声で始めます。</p>
+            <div class="firstline">お世話になっております。<b id="fCompany">―</b>の<b>おおたに</b>と申します。<b id="fCallee">―</b>はいらっしゃいますでしょうか。</div>
+
+            <ol class="guide">
+              <li><span class="g-n">01</span><span><b>受付の方になったつもりでお応えください。</b>AIはご担当者につないでもらうための会話をします。</span></li>
+              <li><span class="g-n">02</span><span><b>「今忙しい」「間に合っている」と断ってみてください。</b>断られたあとにAIがどう返すかを聞けます。</span></li>
+              <li><span class="g-n">03</span><span><b>取り次いでいただけた場面では、</b>AIが「ここからは担当に変わります」とご案内して終話します。本番ではここで実際にオペレーターに繋がります。</span></li>
+              <li><span class="g-n">04</span><span><b>2分が経つと自動的に切断されます。</b>途中でお切りいただいても構いません。</span></li>
+            </ol>
+
+            <p class="guard"><b>AIは、ご入力いただいた営業トークの範囲でお応えします。</b>
+            雑談や商材と無関係なご質問など、直接営業に関係しない話題にはお答えできないよう設定されています。</p>
+
+            <div class="callnote">
+              <p><b>通話料はお客様のご負担となります。</b>携帯電話から固定電話（03）へのおかけになるため、2分で概ね80〜120円です（かけ放題プランの場合は無料です）。</p>
+              <p><b>混み合っているときは、最大30秒ほどお待ちいただくことがあります。</b>それでもつながらない場合は、少し時間をおいておかけ直しください。</p>
+            </div>
+
+            <p class="after">
+              通話が終わったら、<b id="afterMail">―</b> に<b>通話の録音</b>をお送りします。<br>
+              おかけになれなかった場合は、もう一度お申し込みいただけます（<b id="triesLeft">あと2回</b>）。
+            </p>
+
+            <p class="hint" style="margin-top:16px">ご不明な点は <a href="tel:0368698063" style="color:var(--flare);border-bottom:1px solid rgba(242,102,17,.5)">Tel. 03-6869-8063</a>（平日 10:00〜19:00・土日祝を除く）までお問い合わせください。通話中のご案内でお伝えする窓口です。</p>
+
             <div class="submit-row">
               <button class="btn btn-ghost" type="button" id="redo"><b>入力内容を修正する</b><i>↺</i></button>
+            </div>
+
+            <div class="recap">
+              <div><dt>会社名</dt><dd id="rCompany">―</dd></div>
+              <div><dt>部署・役職</dt><dd id="rDept">―</dd></div>
+              <div><dt>氏名</dt><dd id="rName">―</dd></div>
+              <div><dt>携帯番号</dt><dd id="rTel">―</dd></div>
+              <div><dt>メール</dt><dd id="rEmail">―</dd></div>
+              <div><dt>呼出先</dt><dd id="rCallee">―</dd></div>
+              <div><dt>サービス名</dt><dd id="rSvc">―</dd></div>
+              <div><dt>用件</dt><dd id="rPurpose">―</dd></div>
             </div>
           </div>
         </div>
@@ -464,7 +686,11 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
           <div class="log">
             <div class="line">
               <span class="who ai">AI</span>
-              <p class="say">お世話になっております。<span class="v" id="pCompany">〇〇</span>の<span class="v" id="pName">△△</span>様のお電話でお間違いないでしょうか。ディグロスのAIテレアポと申します。<span class="caret"></span></p>
+              <p class="say">ディグロスのAIテレアポ、デモのお電話です。この通話は録音されます。ではデモを始めます。</p>
+            </div>
+            <div class="line">
+              <span class="who ai">AI</span>
+              <p class="say">お世話になっております。<span class="v" id="pCompany">〇〇</span>の<span class="v">おおたに</span>と申します。<span class="v" id="pCallee">△△様</span>はいらっしゃいますでしょうか。<span class="caret"></span></p>
             </div>
             <div class="line you">
               <span class="who you">YOU</span>
@@ -472,10 +698,18 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
             </div>
             <div class="line">
               <span class="who ai">AI</span>
-              <p class="say">失礼いたしました。1分だけお時間いただけますでしょうか。<span class="v" id="pDept">営業部</span>のお客様に多いご相談で……</p>
+              <p class="say">失礼いたしました。<span class="v" id="pSvc">ご案内</span>の件で、<span class="v" id="pPurpose">1分だけお時間いただけますでしょうか</span>。</p>
+            </div>
+            <div class="line you">
+              <span class="who you">YOU</span>
+              <p class="say">少々お待ちください。担当者に代わりますね。</p>
+            </div>
+            <div class="line">
+              <span class="who ai">AI</span>
+              <p class="say">ありがとうございますー、ここからは担当に変わりますので、よろしくお願いいたしますー。</p>
             </div>
           </div>
-          <p class="con-ft">デモ通話は2分経過で自動切断／全通話を文字起こしして記録します</p>
+          <p class="con-ft">デモ通話は2分経過で自動切断／取次の案内をして終話します</p>
         </div>
         <p class="con-cap">入力内容が、そのまま第一声に反映されます</p>
       </aside>
@@ -494,20 +728,20 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
       <div class="step">
         <div class="step-bar"></div><span class="clock">1分</span>
         <p class="no">01</p>
-        <h3>5項目を入力する</h3>
-        <p>会社名・部署・氏名・電話番号・メールアドレスのみ。入力内容はトークスクリプトにそのまま差し込まれ、実際の架電と同じ条件を再現します。</p>
+        <h3>フォームに入力する</h3>
+        <p>会社名・氏名・携帯番号・メールアドレスに加え、AIに話させる内容（呼出先・サービス名・用件）をご記入ください。送信すると<b>受付番号</b>が表示されます。</p>
       </div>
       <div class="step">
-        <div class="step-bar"></div><span class="clock">最短1分後</span>
+        <div class="step-bar"></div><span class="clock">30分以内</span>
         <p class="no">02</p>
-        <h3>AIから着信する</h3>
-        <p>03-6869-8063 からデモ通話を発信します。通話時間は最大2分以内で、2分が経過すると自動的に切断されます。途中で切っていただいても構いません。</p>
+        <h3>受付番号におかけになる</h3>
+        <p>表示された受付番号に、お申し込みの携帯電話からおかけください（30分以内）。通話時間は最大2分以内で、2分が経過すると自動的に切断されます。途中で切っていただいても構いません。</p>
       </div>
       <div class="step">
         <div class="step-bar"></div><span class="clock">通話後10分</span>
         <p class="no">03</p>
-        <h3>通話ログを受け取る</h3>
-        <p>文字起こし、応答速度、切り返しの判定ログをメールでお送りします。自社スクリプトに置き換えた場合の試算もあわせて確認できます。</p>
+        <h3>通話の録音を受け取る</h3>
+        <p>通話の録音をメールでお送りします。ご自身が入力した内容でAIがどう話したかを、そのまま聞き返せます。</p>
       </div>
     </div>
 
@@ -535,11 +769,11 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
       </div>
       <div class="card">
         <h3><span class="k">03</span>担当者への引き継ぎ</h3>
-        <p>「詳しく聞きたい」と伝えると、その場で人のオペレーターへ転送されます。温度の高い相手だけが人に届く導線です。</p>
+        <p>「詳しく聞きたい」と伝えると、本番ではその場で人のオペレーターへ転送されます。デモではその案内をしてAIが終話します。</p>
       </div>
       <div class="card">
         <h3><span class="k">04</span>通話ログの粒度</h3>
-        <p>全通話が文字起こしされ、どの発言で興味が動いたかが残ります。属人的だったトーク改善が、データで回せるようになります。</p>
+        <p>全通話が録音され、どの発言で興味が動いたかを聞き返せます。属人的だったトーク改善が、記録をもとに回せるようになります。</p>
       </div>
     </div>
   </div>
@@ -554,19 +788,19 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
     <div class="faq">
       <details open>
         <summary>通話はどのくらいの長さですか？</summary>
-        <p>デモ通話は最大2分以内です。2分が経過すると自動的に切断されますので、長時間拘束されることはありません。途中でお切りいただいても、そこまでの通話ログをレポートとしてお送りします。</p>
+        <p>デモ通話は最大2分以内です。2分が経過すると自動的に切断されますので、長時間拘束されることはありません。途中でお切りいただいても、そこまでの録音をお送りします。</p>
       </details>
       <details>
         <summary>デモの後に営業の電話はかかってきますか？</summary>
-        <p>かかってきません。デモ用の番号から発信するのはAIによるデモ通話のみで、1つの電話番号につき3回まで受け付けます。詳細のご相談をご希望の場合のみ、レポートメールに記載のフォームからお申し込みください。</p>
+        <p>お客様からおかけいただいた通話にAIが応対するのみです（1つの電話番号につき3回まで）。当社から発信することはありません。詳細のご相談をご希望の場合は、録音をお送りするメールに記載のフォームからお申し込みください。</p>
       </details>
       <details>
         <summary>入力した電話番号は何に使われますか？</summary>
-        <p>デモ通話の発信と、通話後のレポート送付にのみ使用します。第三者への提供は行いません。デモ終了後の削除をご希望の場合は、レポートメールへの返信でお申し付けください。</p>
+        <p>お電話の照合（本人確認）と、通話後の録音送付にのみ使用します。第三者への提供は行いません。デモ終了後の削除をご希望の場合は、録音をお送りするメールへの返信でお申し付けください。</p>
       </details>
       <details>
         <summary>自社のトークスクリプトで試すことはできますか？</summary>
-        <p>デモでは標準スクリプトを使用します。貴社商材に合わせたスクリプトでの検証は、ヒアリングのうえ2〜3週間で構築し、テスト架電までご案内しています。</p>
+        <p>できます。フォームにご記入いただいた呼出先・サービス名・用件を、AIがそのまま読み上げます。名乗り（おおたに）と男性の声のみ固定です。より作り込んだスクリプトでの検証は、ヒアリングのうえ2〜3週間で構築いたします。</p>
       </details>
     </div>
   </div>
@@ -577,7 +811,7 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
     <div>
       <h2>2 MINUTES.</h2>
       <p class="jp">聞けば、導入すべきかどうかがわかります</p>
-      <p>入力は5項目、費用はかかりません。デモ通話は最大2分以内で自動的に終了します。</p>
+      <p>入力は必須7項目、費用はかかりません。デモ通話は最大2分以内で自動的に終了します。</p>
       <div class="submit-row" style="margin-top:26px">
         <a class="btn btn-lg btn-primary" href="#entry"><b>今すぐAI通話を体験する</b><i>→</i></a>
       </div>
@@ -593,7 +827,7 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
 
 <div class="sticky-cta" id="stickyCta">
   <div class="sticky-in">
-    <p class="sticky-txt"><b>AIテレアポ 無料デモ体験</b><span>入力5項目／デモ通話は最大2分以内で自動終了</span></p>
+    <p class="sticky-txt"><b>AIテレアポ 無料デモ体験</b><span>必須7項目／デモ通話は最大2分以内で自動終了</span></p>
     <a class="btn btn-primary" href="#entry"><b>今すぐAI通話を体験する</b><i>→</i></a>
   </div>
 </div>
@@ -632,14 +866,43 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
       formErr=document.getElementById('formErr'), conState=document.getElementById('conState');
   var company=document.getElementById('company'), name=document.getElementById('name'),
       dept=document.getElementById('dept');
+  var callee=document.getElementById('callee'), svc=document.getElementById('svc'),
+      purpose=document.getElementById('purpose');
+
 
   function live(){
-    document.getElementById('pCompany').textContent=company.value.trim()||'〇〇';
-    document.getElementById('pName').textContent=name.value.trim()||'△△';
-    document.getElementById('pDept').textContent=dept.value.trim()||'営業部';
-    conState.textContent=(company.value.trim()||name.value.trim()||dept.value.trim())?'LIVE SCRIPT':'SCRIPT PREVIEW';
+    var c=company.value.trim(), ca=callee.value.trim(), sv=svc.value.trim(), pu=purpose.value.trim();
+    document.getElementById('pCompany').textContent=c||'〇〇';
+    document.getElementById('pCallee').textContent=ca||'△△様';
+    document.getElementById('pSvc').textContent=sv||'ご案内';
+    document.getElementById('pPurpose').textContent=pu||'1分だけお時間いただけますでしょうか';
+    document.getElementById('sayCompany').textContent=c||'〇〇';
+    conState.textContent=(c||ca||sv||pu)?'LIVE SCRIPT':'SCRIPT PREVIEW';
+    counts(); reqLeftUpdate();
   }
-  [company,name,dept].forEach(function(el){el.addEventListener('input',live)});
+  [company,name,dept,callee,svc,purpose].forEach(function(el){el.addEventListener('input',live)});
+
+  // 文字数カウンタ（上限＝APXの推奨値。§13-2-1）
+  var LIMITS={callee:30,svc:50,purpose:40};
+  function counts(){
+    Object.keys(LIMITS).forEach(function(id){
+      var el=document.getElementById(id), out=document.querySelector('.cnt[data-cnt="'+id+'"]');
+      if(!el||!out) return;
+      var n=el.value.length, max=LIMITS[id];
+      out.textContent=n+' / '+max+'字';
+      out.classList.toggle('warn', n>=max-3);
+    });
+  }
+
+
+  // 「未入力の必須項目 N件」（任意と必須を混ぜたぶんの補い）
+  function reqLeftUpdate(){
+    var el=document.getElementById('reqLeft'); if(!el) return;
+    var n=rules.filter(function(r){return !r[2](document.getElementById(r[0]).value.trim())}).length;
+    if(!document.getElementById('agree').checked) n++;
+    el.textContent = n===0 ? 'すべて入力できています' : '未入力の必須項目：'+n+'件';
+    el.classList.toggle('on', n>0);
+  }
 
   function setMsg(id,text){
     var el=document.querySelector('.msg[data-for="'+id+'"]');
@@ -649,43 +912,186 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
   }
 
   var rules=[
-    ['company','会社名を入力してください',function(v){return v.length>0}],
-    ['dept','部署を入力してください',function(v){return v.length>0}],
+    ['company','会社名を入力してください（30字以内）',function(v){return v.length>0&&v.length<=30}],
     ['name','氏名を入力してください',function(v){return v.length>0}],
-    ['tel','電話番号を、ハイフンなし10〜11桁で入力してください',function(v){return /^0\d{9,10}$/.test(v.replace(/[-‐−ー\s]/g,''))}],
-    ['email','メールアドレスの形式が正しくありません',function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)}]
+    // 決定21: 携帯（070/080/090）のみ。固定電話・IP電話・フリーダイヤルは受け付けない
+    // #1353 の決定に合わせ、まず NFKC で全角→半角に正規化してから判定する
+    ['tel','携帯電話番号（070／080／090 から始まる11桁）を入力してください',function(v){return /^0[789]0\d{8}$/.test(normTel(v))}],
+    ['email','メールアドレスの形式が正しくありません',function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(normMail(v))}],
+    ['callee','呼び出したい相手を入力してください（30字以内）',function(v){return v.length>0&&v.length<=30}],
+    ['svc','サービス名を入力してください（50字以内）',function(v){return v.length>0&&v.length<=50}],
+    ['purpose','用件を入力してください（40字以内）',function(v){return v.length>0&&v.length<=40}]
   ];
   rules.forEach(function(r){
     var el=document.getElementById(r[0]);
-    el.addEventListener('blur',function(){setMsg(r[0],r[2](el.value.trim())?'':r[1])});
+    el.addEventListener('blur',function(){setMsg(r[0],r[2](el.value.trim())?'':r[1]);reqLeftUpdate()});
+    el.addEventListener('input',reqLeftUpdate);
   });
+  document.getElementById('agree').addEventListener('change',reqLeftUpdate);
+
+  // ====================================================================
+  // デモ通話の申し込みを API へ送る
+  //   POST {API_BASE}/api/v1/demo-calls（認証不要の公開エンドポイント）
+  //   API_BASE は <head> の定数。1箇所だけで検証→本番を切り替える。
+  // ====================================================================
+  var API_URL=(typeof API_BASE==='string'?API_BASE:'').replace(/\/+$/,'')+'/api/v1/demo-calls';
+
+  // サーバが返す field（スネークケース）→ フォームの id
+  var FIELD_MAP={company_name:'company',contact_name:'name',department_title:'dept',
+    phone:'tel',email:'email',callee_name:'callee',service_name:'svc',purpose:'purpose'};
+
+  var DEFAULT_FORM_ERR=formErr.textContent;
+  var MSG_BUSY='短時間に送信が集中しています。しばらくしてからお試しください';
+  var MSG_FAIL='送信できませんでした。恐れ入りますが、しばらくしてからお試しください';
+
+  // 全角で入力されても受け付ける。判定と送信で必ず同じ正規化を使う
+  function normTel(v){return String(v||'').normalize('NFKC').replace(/[-‐−ー\s()]/g,'')}
+  function normMail(v){return String(v||'').normalize('NFKC').trim()}
+
+  // 電話番号の表記（国内ハイフン）
+  function formatTel(n){
+    var d=String(n||'').replace(/[^0-9]/g,'');
+    if(d.length===11) return d.slice(0,3)+'-'+d.slice(3,7)+'-'+d.slice(7);
+    if(d.length===10&&d.slice(0,2)==='03') return d.slice(0,2)+'-'+d.slice(2,6)+'-'+d.slice(6);
+    if(d.length===10) return d.slice(0,3)+'-'+d.slice(3,6)+'-'+d.slice(6);
+    return d||'―';
+  }
+
+  // 流入元（utm_*）を URL のクエリから拾う
+  function collectUtm(){
+    var utm={}, q=location.search.replace(/^\?/,'').split('&');
+    for(var i=0;i<q.length;i++){
+      if(!q[i]) continue;
+      var p=q[i].split('='), k='', v='';
+      try{
+        k=decodeURIComponent((p[0]||'').replace(/\+/g,' '));
+        v=decodeURIComponent((p.slice(1).join('=')||'').replace(/\+/g,' '));
+      }catch(err){ continue; }
+      if(k.indexOf('utm_')===0 && v) utm[k]=v;
+    }
+    return utm;
+  }
+
+  function buildPayload(){
+    var body={
+      company_name:company.value.trim(),
+      contact_name:name.value.trim(),
+      phone:normTel(document.getElementById('tel').value),
+      email:normMail(document.getElementById('email').value),
+      callee_name:callee.value.trim(),
+      service_name:svc.value.trim(),
+      purpose:purpose.value.trim(),
+      utm:collectUtm(),
+      referrer:document.referrer||'',
+      landing_page:location.href
+    };
+    var d=dept.value.trim();
+    if(d) body.department_title=d;
+    return body;
+  }
+
+  function showFormErr(text){ formErr.textContent=text||DEFAULT_FORM_ERR; formErr.classList.add('on'); }
+  function hideFormErr(){ formErr.textContent=DEFAULT_FORM_ERR; formErr.classList.remove('on'); }
+
+  // 400：サーバの文言をそのまま項目の下に出す（自前で訳さない）
+  function applyFieldErrors(fields){
+    var first=null, orphan=[];
+    for(var i=0;i<fields.length;i++){
+      var it=fields[i]||{}, id=FIELD_MAP[it.field], msg=it.message||'';
+      var input=id?document.getElementById(id):null;
+      var slot=id?document.querySelector('.msg[data-for="'+id+'"]'):null;
+      if(input&&slot){ setMsg(id,msg||DEFAULT_FORM_ERR); if(!first)first=input; }
+      else { orphan.push((it.field?it.field+'：':'')+(msg||DEFAULT_FORM_ERR)); }  // 対応表に無い項目も黙って捨てない
+    }
+    showFormErr(orphan.length?orphan.join('／'):DEFAULT_FORM_ERR);
+    if(first) first.focus();
+  }
+
+  // 成功：完了画面は「サーバが返した値」で作る
+  function showResult(d){
+    var dial=String(d.dialInNumber||'').replace(/[^0-9]/g,'');
+    var no=document.getElementById('dialNo');
+    if(no){
+      no.textContent=dial?formatTel(dial):'―';
+      if(dial) no.setAttribute('href','tel:'+dial); else no.removeAttribute('href');
+    }
+    document.getElementById('fromTel').textContent=
+      formatTel(d.callFromPhone||normTel(document.getElementById('tel').value));
+    var tl=document.getElementById('triesLeft');
+    if(tl&&typeof d.remainingCalls==='number') tl.textContent='あと'+d.remainingCalls+'回';
+
+    document.getElementById('rCompany').textContent=company.value.trim();
+    document.getElementById('rDept').textContent=dept.value.trim()||'（未入力）';
+    document.getElementById('rName').textContent=name.value.trim()+' 様';
+    document.getElementById('rTel').textContent=formatTel(normTel(document.getElementById('tel').value));
+    document.getElementById('rEmail').textContent=normMail(document.getElementById('email').value);
+    document.getElementById('rCallee').textContent=callee.value.trim();
+    document.getElementById('rSvc').textContent=svc.value.trim();
+    document.getElementById('rPurpose').textContent=purpose.value.trim();
+    document.getElementById('fCompany').textContent=company.value.trim();
+    document.getElementById('fCallee').textContent=callee.value.trim();
+
+    f.style.display='none';
+    sent.classList.add('on');
+    conState.textContent='WAITING';
+    document.getElementById('afterMail').textContent=normMail(document.getElementById('email').value);
+    startExpiry(d.expiresAt,d.expiresInMinutes);
+    bar.classList.remove('on');
+    sent.scrollIntoView({block:'center'});
+  }
+
+  // 二重送信の防止（ボタンの disabled だけでは Enter キーを止められない）
+  var sending=false, submitBtn=document.getElementById('submitBtn');
+  var submitBtnHtml=submitBtn?submitBtn.innerHTML:'';
+  function setSending(on){
+    sending=on;
+    if(!submitBtn) return;
+    submitBtn.disabled=on;
+    submitBtn.innerHTML=on?'<b>送信中…</b>':submitBtnHtml;
+  }
 
   f.addEventListener('submit',function(e){
     e.preventDefault();
+    if(sending) return;
+
+    // 送る前に弾けるものは弾く（既存の rules はそのまま）
     var first=null, ok=true;
     rules.forEach(function(r){
       var el=document.getElementById(r[0]), valid=r[2](el.value.trim());
       setMsg(r[0],valid?'':r[1]);
       if(!valid){ok=false;if(!first)first=el}
     });
+    setMsg('dept','');  // 前回のサーバエラーを消す（dept は rules に無い）
     var agree=document.getElementById('agree');
     if(!agree.checked){setMsg('agree','個人情報の取り扱いへの同意が必要です');ok=false;if(!first)first=agree}
     else setMsg('agree','');
-    formErr.classList.toggle('on',!ok);
-    if(!ok){if(first)first.focus();return}
+    if(!ok){showFormErr(DEFAULT_FORM_ERR);if(first)first.focus();return}
+    hideFormErr();
 
-    document.getElementById('rCompany').textContent=company.value.trim();
-    document.getElementById('rDept').textContent=dept.value.trim();
-    document.getElementById('rName').textContent=name.value.trim()+' 様';
-    document.getElementById('rTel').textContent=document.getElementById('tel').value.trim();
-    document.getElementById('rEmail').textContent=document.getElementById('email').value.trim();
-    document.getElementById('sentTel').textContent=document.getElementById('tel').value.trim();
+    if(typeof fetch!=='function'){showFormErr(MSG_FAIL);return}
 
-    f.style.display='none';
-    sent.classList.add('on');
-    conState.textContent='DIALING';
-    bar.classList.remove('on');
-    sent.scrollIntoView({block:'center'});
+    setSending(true);
+    fetch(API_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(buildPayload())
+    }).then(function(res){
+      // 500 等は JSON でないことがあるので、テキストで受けてから見る
+      return res.text().then(function(t){
+        var j=null; try{j=JSON.parse(t)}catch(err){}
+        return {status:res.status,json:j};
+      });
+    }).then(function(r){
+      setSending(false);
+      if(r.status===201&&r.json&&r.json.ok&&r.json.data){showResult(r.json.data);return}
+      if(r.status===429){showFormErr(MSG_BUSY);return}
+      if(r.status===400&&r.json&&r.json.fields&&r.json.fields.length){applyFieldErrors(r.json.fields);return}
+      if(r.status===400&&r.json){showFormErr(r.json.message||r.json.error||DEFAULT_FORM_ERR);return}
+      showFormErr(MSG_FAIL);
+    })['catch'](function(){
+      setSending(false);   // 通信断・CORS 等。入力内容は消さない
+      showFormErr(MSG_FAIL);
+    });
   });
 
   // セクションのフェードイン
@@ -710,7 +1116,39 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
     },{threshold:0}).observe(entry);
   }
 
+
+  // ===== 受付番号の画面（インバウンド・決定52） =====
+  // 認証コードは不要になった（発信者番号の照合で本人確認する）。
+  // 有効期限は30分固定ではなく、サーバの expiresAt から毎回計算する
+  // （目減らしだと、タブを裏にしたときにずれる）。
+  var expiryTimer=null;
+  function startExpiry(expiresAt,fallbackMinutes){
+    var el=document.getElementById('expiry');
+    var now=(new Date()).getTime(), deadline=NaN;
+    if(expiresAt) deadline=Date.parse(expiresAt);
+    // expiresAt にタイムゾーンが付いていないと、ブラウザは現地時間として読む。
+    // expiresInMinutes と大きくずれたら解釈を捨てて分数で数える。
+    if(!isNaN(deadline)&&typeof fallbackMinutes==='number'&&fallbackMinutes>0
+       &&(deadline>now+(fallbackMinutes+2)*60*1000||deadline<now)) deadline=NaN;
+    if(isNaN(deadline)){
+      var fm=(typeof fallbackMinutes==='number'&&fallbackMinutes>0)?fallbackMinutes:30;
+      deadline=now+fm*60*1000;
+    }
+    clearInterval(expiryTimer);
+    function tick(){
+      var left=Math.floor((deadline-(new Date()).getTime())/1000);
+      if(left<=0){ clearInterval(expiryTimer); el.textContent='有効期限が切れました'; return; }
+      var m=Math.floor(left/60), sec=left%60;
+      el.textContent='残り '+m+':'+(sec<10?'0':'')+sec;
+    }
+    tick(); expiryTimer=setInterval(tick,1000);
+  }
+
+  live();
+
   document.getElementById('redo').addEventListener('click',function(){
+    clearInterval(expiryTimer);
+    hideFormErr();
     sent.classList.remove('on');
     f.style.display='block';
     conState.textContent='LIVE SCRIPT';
