@@ -245,6 +245,9 @@ input.err{border-color:#FF6B6B;background:rgba(255,107,107,.08)}
   background:rgba(255,107,107,.09);padding:11px 14px;font-size:12.5px;color:#FFC2C2}
 .form-err.on{display:block}
 .sent{display:none}
+/* ★上に貼り付くヘッダー(.hd-in は 66px)の下に隠れないよう、スクロール位置に余白を取る。
+   scrollIntoView の着地点をブラウザ側でずらす仕組み。値は既存の #entry と揃えている。 */
+.sent{scroll-margin-top:88px}
 .sent.on{display:block}
 .sent .ok{font-family:var(--en);font-weight:800;font-size:13px;letter-spacing:.18em;color:var(--flare)}
 .sent h2{font-family:var(--jp);font-weight:900;font-size:25px;line-height:1.5;margin:12px 0 16px}
@@ -1037,7 +1040,9 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
     document.getElementById('afterMail').textContent=normMail(document.getElementById('email').value);
     startExpiry(d.expiresAt,d.expiresInMinutes);
     bar.classList.remove('on');
-    sent.scrollIntoView({block:'center'});
+    // ★block:'center' だと完了画面が縦に長いとき上端が画面外（ヘッダーの裏）へ押し出される。
+    //   'start' + .sent の scroll-margin-top でヘッダーの下から始まるようにする。
+    sent.scrollIntoView({block:'start',behavior:'smooth'});
   }
 
   // 二重送信の防止（ボタンの disabled だけでは Enter キーを止められない）
