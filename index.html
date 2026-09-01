@@ -369,7 +369,7 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
 .reqleft{margin-top:14px;font-size:11.5px;color:var(--muted);text-align:center}
 .reqleft.on{color:#FF8A8A}
 @media (max-width:700px){.pill{flex:1 1 100%}}
-/* ===== 受付番号の画面（決定52・インバウンド） ===== */
+/* ===== 受付番号の画面 ===== */
 .callbox{border:1px solid rgba(214,251,0,.4);background:rgba(214,251,0,.07);border-radius:3px;padding:26px 22px;text-align:center;margin:20px 0}
 .cb-lab{font-size:11.5px;letter-spacing:.14em;color:var(--muted);margin:0 0 10px}
 .cb-no{display:inline-block;font-family:var(--en);font-size:40px;font-weight:900;color:#fff;text-decoration:none;letter-spacing:.01em;line-height:1.15}
@@ -414,7 +414,7 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
 .after{margin-top:22px;border-top:1px solid var(--line);padding-top:16px;font-size:12px;color:var(--muted);line-height:1.85}
 .after b{color:#CBD1E6}
 @media (prefers-reduced-motion:reduce){}
-/* ===== 決定47: アップデート中の表示 ===== */
+/* ===== アップデート中の表示 ===== */
 #maint{display:none}
 #maint.on{display:block}
 .maint-box{border:1px solid rgba(43,47,184,.5);background:rgba(43,47,184,.12);border-radius:3px;padding:30px 28px;text-align:center}
@@ -422,7 +422,7 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
 .maint-box p{font-size:13.5px;color:#CBD1E6;line-height:1.9;margin:0 auto;max-width:46ch}
 .maint-box .spin{width:26px;height:26px;border:3px solid rgba(255,255,255,.2);border-top-color:#D6FB00;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 16px}
 
-/* ===== 決定50: 通話開始時のステータスを目立たせる ===== */
+/* ===== 通話開始時のステータスを目立たせる ===== */
 
 
 
@@ -430,8 +430,8 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
 
 
 @media (max-width:520px){}
-/* ===== 決定51: ガードレールの注意書き ===== */
-/* ===== 決定46改: 発信「前」に読ませる案内 ===== */
+/* ===== ガードレールの注意書き ===== */
+/* ===== 発信前に読ませる案内 ===== */
 
 
 
@@ -453,26 +453,9 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
 .guard b{color:#fff}
 </style>
 
-<!-- ============================================================
-     デモ通話API の接続先（★環境の切り替えはこの1箇所だけ）
-       本番    : https://xrjbqfvtm2.ap-northeast-1.awsapprunner.com
-       検証環境: https://t6zasvru9u.ap-northeast-1.awsapprunner.com
-     切り替え方: 下の2行のコメントを入れ替える（いまは本番）。
-
-     ★テスト段階から本番APIを使う（2026-08-26 オーナー決定・決定68）。
-       申込・台本・通話が**本番のデータ**として作られる（デモ専用テナント v8569 の中だけ）。
-       - 営業のグループ（pd@dgloss.co.jp）にリード通知が飛ぶ。
-         テストのときは会社名に【テスト】を入れて見分けが付くようにすること。
-       - 1日100件の受付上限を消費する。
-
-     ★CORSの許可が要る（無いとブラウザが通信自体を止める。サーバのログにも残らない）。
-       本番が許可しているのは https://dgloss.co.jp のみ。
-       → **Vercel で試す間は、本番に APP_LP_URL=https://dgloss-lp.vercel.app が必要**。
-       → 最終的に dgloss.co.jp/ai-solution/demo へ同居させたら APP_LP_URL は消す（決定65）。
-     ============================================================ -->
+<!-- デモ通話APIの接続先。変更する場合はこの1行のみ。 -->
 <script>
-  var API_BASE = 'https://xrjbqfvtm2.ap-northeast-1.awsapprunner.com';   // 本番（既定）
-  // var API_BASE = 'https://t6zasvru9u.ap-northeast-1.awsapprunner.com'; // 検証環境
+  var API_BASE = 'https://xrjbqfvtm2.ap-northeast-1.awsapprunner.com';
 </script>
 </head>
 <body>
@@ -917,8 +900,8 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
   var rules=[
     ['company','会社名を入力してください（30字以内）',function(v){return v.length>0&&v.length<=30}],
     ['name','氏名を入力してください',function(v){return v.length>0}],
-    // 決定21: 携帯（070/080/090）のみ。固定電話・IP電話・フリーダイヤルは受け付けない
-    // #1353 の決定に合わせ、まず NFKC で全角→半角に正規化してから判定する
+    // 携帯（070/080/090）のみ。固定電話・IP電話・フリーダイヤルは受け付けない
+    // まず NFKC で全角→半角に正規化してから判定する
     ['tel','携帯電話番号（070／080／090 から始まる11桁）を入力してください',function(v){return /^0[789]0\d{8}$/.test(normTel(v))}],
     ['email','メールアドレスの形式が正しくありません',function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(normMail(v))}],
     ['callee','呼び出したい相手を入力してください（30字以内）',function(v){return v.length>0&&v.length<=30}],
@@ -1122,7 +1105,7 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
   }
 
 
-  // ===== 受付番号の画面（インバウンド・決定52） =====
+  // ===== 受付番号の画面 =====
   // 認証コードは不要になった（発信者番号の照合で本人確認する）。
   // 有効期限は30分固定ではなく、サーバの expiresAt から毎回計算する
   // （目減らしだと、タブを裏にしたときにずれる）。
