@@ -3,6 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google Tag Manager
+     ★コーポレートサイト（dgloss.co.jp）と同じコンテナ GTM-KNCT7XRD を使う。
+       このページは単体のHTMLなので、dgloss.co.jp 配下に置いてもサイト本体のタグは効かない。
+       入れないと、このページだけ計測の穴になる。
+     ★GA4はGTM経由で発火する（実測で送信先は G-HZTXH2RXE3。サイト本体と同一プロパティ）。
+       gtag.js を直に入れると二重計測になるので入れない。
+       ※サイトのHTMLには G-KDL87VDJ8T も書かれているが、実通信では飛んでいない（サイト側の整理事項）。
+     ★イベント（フォーム送信のコンバージョン等）はGTMの画面で足す。ここのHTMLは触らない。 -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KNCT7XRD');</script>
+<!-- End Google Tag Manager -->
 <title>AIテレアポ 無料デモ体験 ｜ DGLOSS</title>
 <meta name="description" content="AIテレアポのデモ通話を無料で体験。フォーム送信後、最短1分でAIがお電話します。デモ通話は最大2分以内で自動終了。入力は会社名・部署・氏名・電話番号・メールアドレスの5項目のみ。">
 <meta name="theme-color" content="#05060F">
@@ -224,6 +238,17 @@ img{max-width:100%;display:block}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px 20px}
 .field{display:flex;flex-direction:column}
 .field.full{grid-column:1/-1}
+/* ===== AIの音声モデル（ラジオ2つ・2026-09-04） ===== */
+.voice-pick{display:flex;gap:10px;margin-top:8px}
+.voice-opt{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;
+  border:1px solid var(--line);border-radius:8px;padding:12px 10px;cursor:pointer;
+  font-size:14px;font-weight:700;color:#CBD1E6;background:rgba(255,255,255,.02);
+  transition:border-color .15s,background .15s,color .15s}
+.voice-opt:hover{border-color:rgba(242,102,17,.45)}
+.voice-opt input{accent-color:var(--flare);width:16px;height:16px;margin:0}
+.voice-opt:has(input:checked){border-color:var(--flare);background:rgba(242,102,17,.10);color:#fff}
+.voice-opt input:focus-visible{outline:2px solid var(--flare);outline-offset:2px}
+.voice-pick.err .voice-opt{border-color:#F26611}
 .lb{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;
   letter-spacing:.1em;margin-bottom:8px;font-family:var(--jp)}
 .req{font-size:9.5px;letter-spacing:.1em;background:var(--flare);padding:3px 6px;
@@ -459,6 +484,10 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
 </script>
 </head>
 <body>
+<!-- Google Tag Manager (noscript)。JavaScriptを切っている環境でもページビューを拾う -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KNCT7XRD"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <header class="hd">
   <div class="hd-in">
@@ -565,6 +594,15 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
                 <p class="cnt" data-cnt="purpose">0 / 40字</p>
                 <p class="hint">電話で読み上げる一言です。長いと要点がぼやけます。</p>
                 <p class="msg" role="alert" aria-live="polite" data-for="purpose"></p>
+              </div>
+              <div class="field full">
+                <span class="lb">AIの音声モデル <span class="req">必須</span></span>
+                <div class="voice-pick" role="radiogroup" aria-label="AIの音声モデル">
+                  <label class="voice-opt"><input type="radio" name="voice_gender" value="male"><span>男性</span></label>
+                  <label class="voice-opt"><input type="radio" name="voice_gender" value="female"><span>女性</span></label>
+                </div>
+                <p class="hint">お電話でお話しするAIの声です。どちらか選んでください。</p>
+                <p class="msg" role="alert" aria-live="polite" data-for="voice_gender"></p>
               </div>
             </div>
 
@@ -882,6 +920,7 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
     var el=document.getElementById('reqLeft'); if(!el) return;
     var n=rules.filter(function(r){return !r[2](document.getElementById(r[0]).value.trim())}).length;
     if(!document.getElementById('agree').checked) n++;
+    if(!voicePicked()) n++;   // AIの音声モデル（必須選択）
     el.textContent = n===0 ? 'すべて入力できています' : '未入力の必須項目：'+n+'件';
     el.classList.toggle('on', n>0);
   }
@@ -891,6 +930,18 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
     if(el) el.textContent=text||'';
     var input=document.getElementById(id);
     if(input&&input.type!=='checkbox'){input.classList.toggle('err',!!text);input.setAttribute('aria-invalid',text?'true':'false')}
+  }
+
+  // AIの音声モデル（ラジオ2つ・必須）。既存の rules はテキスト入力前提なので別に見る
+  function voicePicked(){
+    var el=document.querySelector('input[name="voice_gender"]:checked');
+    return el?el.value:'';
+  }
+  function setVoiceMsg(text){
+    var slot=document.querySelector('.msg[data-for="voice_gender"]');
+    if(slot) slot.textContent=text||'';
+    var box=document.querySelector('.voice-pick');
+    if(box) box.classList.toggle('err',!!text);
   }
 
   var rules=[
@@ -904,6 +955,11 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
     ['svc','サービス名を入力してください（50字以内）',function(v){return v.length>0&&v.length<=50}],
     ['purpose','用件を入力してください（40字以内）',function(v){return v.length>0&&v.length<=40}]
   ];
+  // 選んだ瞬間に「未入力の必須項目 N件」とエラー表示を更新する
+  Array.prototype.forEach.call(document.querySelectorAll('input[name="voice_gender"]'),function(el){
+    el.addEventListener('change',function(){setVoiceMsg('');reqLeftUpdate()});
+  });
+
   rules.forEach(function(r){
     var el=document.getElementById(r[0]);
     el.addEventListener('blur',function(){setMsg(r[0],r[2](el.value.trim())?'':r[1]);reqLeftUpdate()});
@@ -920,7 +976,8 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
 
   // サーバが返す field（スネークケース）→ フォームの id
   var FIELD_MAP={company_name:'company',contact_name:'name',department_title:'dept',
-    phone:'tel',email:'email',callee_name:'callee',service_name:'svc',purpose:'purpose'};
+    phone:'tel',email:'email',callee_name:'callee',service_name:'svc',purpose:'purpose',
+    voice_gender:'voice_gender'};
 
   var DEFAULT_FORM_ERR=formErr.textContent;
   var MSG_BUSY='短時間に送信が集中しています。しばらくしてからお試しください';
@@ -963,6 +1020,7 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
       callee_name:callee.value.trim(),
       service_name:svc.value.trim(),
       purpose:purpose.value.trim(),
+      voice_gender:voicePicked(),
       utm:collectUtm(),
       referrer:document.referrer||'',
       landing_page:location.href
@@ -1046,6 +1104,12 @@ details p{padding:0 8px 22px 0;font-size:13.3px;color:var(--ink-muted);line-heig
       if(!valid){ok=false;if(!first)first=el}
     });
     setMsg('dept','');  // 前回のサーバエラーを消す（dept は rules に無い）
+    // AIの音声モデル（必須選択・2026-09-04）。rules はテキスト前提なので別に見る
+    if(!voicePicked()){
+      setVoiceMsg('AIの音声モデルをお選びください');
+      ok=false;
+      if(!first)first=document.querySelector('input[name="voice_gender"]');
+    } else setVoiceMsg('');
     var agree=document.getElementById('agree');
     if(!agree.checked){setMsg('agree','個人情報の取り扱いへの同意が必要です');ok=false;if(!first)first=agree}
     else setMsg('agree','');
